@@ -40,8 +40,7 @@ con.execute("DROP TABLE IF EXISTS sensex_stocks;")
 con.execute("""
     CREATE TABLE sensex_stocks (
         Symbol TEXT PRIMARY KEY,
-        Stock_Name TEXT
-    );
+        Stock_Name TEXT);
 """)
 # closing price table
 con.execute("""
@@ -49,8 +48,7 @@ con.execute("""
         Date TEXT,
         Symbol TEXT REFERENCES sensex_stocks(Symbol),  -- Foreign Key
         Closing_Price FLOAT,
-        Active TEXT
-    );
+        Active TEXT);
 """)
 # Insert data into tables
 con.register("temp_sensex", df_sensex)
@@ -67,6 +65,7 @@ con = duckdb.connect("sensex_data.db")
 df = con.execute("SELECT * FROM sensex_stocks").fetchdf()
 con.close()
 print(df)
+
 #to fetch closing price table
 import duckdb
 con = duckdb.connect("sensex_data.db")
